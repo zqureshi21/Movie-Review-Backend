@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
-const knex = require("knex");
 const accessToken = 'accessToken';
 
 let usersData = knex('users').then((usersData)=>{
