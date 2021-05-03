@@ -9,7 +9,7 @@ let usersData = knex('users').then((usersData)=>{
 })
 
 router.post('/login', async function(req, res, next) {
-    const username = req.body.user
+    const username = req.body.username
     const password = req.body.password
     let users = await usersData
     const user = users.find(u => { return u.username === username && u.password === password });
