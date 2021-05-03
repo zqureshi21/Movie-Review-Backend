@@ -8,5 +8,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('moviereview')
+  return knex.schema.dropTable('users')
 };
