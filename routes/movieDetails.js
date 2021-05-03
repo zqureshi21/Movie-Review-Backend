@@ -24,7 +24,7 @@ router.get('/comments/:id', async function(req, res, next) {
     res.send(resp);
 });
 
-router.post('/comment', function(req, res, next){
+router.post('/comments', function(req, res, next){
     knex('comments')
         .insert(req.body)
         .returning('*')
@@ -34,7 +34,7 @@ router.post('/comment', function(req, res, next){
         .catch(err => console.log(err));
 });
 
-router.put('/comment/:id', async function(req, res, next){
+router.put('/comments/:id', async function(req, res, next){
     let comments = await getComments(req.params.id)
     if (req.user.user === comments[0].users_id) {
         knex('comments')
