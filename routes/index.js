@@ -41,7 +41,7 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/user', function(req, res, next){
-    res.send(req.user)
+    res.send(req.user);
 })
 
 module.exports = router;

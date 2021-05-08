@@ -16,7 +16,7 @@ router.get('/movie/:id', async function(req, res, next) {
 });
 
 router.get('/comments/:id', async function(req, res, next) {
-    let resp = await knex('comments').where({movie:req.params.id});
+    let resp = await knex('comments').where({movies_id:req.params.id});
     resp.sort((a,b)=>{
         return a.id - b.id
     })
@@ -51,7 +51,7 @@ router.put('/comments/:id', async function(req, res, next){
 
 router.delete('/:id', async function(req,res,next){
     let comments = await getComments(req.params.id)
-    if (req.user.user === comments[0].users_id){
+    if (req.user.id === comments[0].users_id){
         knex('comments')
             .del()
             .where({id: req.params.id})

@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({origin: '*'}))
 
-const authenticateJWT = (req, res, next) => {
+const jwtAuthentication = (req, res, next) => {
     let authHeader = req.headers.auth;
     if (authHeader) {
         let token = authHeader
@@ -42,8 +42,8 @@ const authenticateJWT = (req, res, next) => {
     }
 };
 
-app.use('/dashboard', authenticateJWT,indexRouter);
-app.use('/movieDetails', authenticateJWT, movieDetailsRouter)
+app.use('/dashboard',indexRouter);
+app.use('/movieDetails', movieDetailsRouter)
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler

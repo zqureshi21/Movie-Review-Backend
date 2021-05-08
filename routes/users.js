@@ -14,7 +14,7 @@ router.post('/login', async function(req, res, next) {
     let users = await usersData
     const user = users.find(u => { return u.username === username && u.password === password });
     if(user) {
-        const authToken = jwt.sign({ user: user.username,  role: user.role, id: user.id }, accessToken);
+        const authToken = jwt.sign({ user: user.username, id: user.id }, accessToken);
         res.json({
             authToken
         });
