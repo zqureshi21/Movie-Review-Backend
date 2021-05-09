@@ -42,8 +42,8 @@ const jwtAuthentication = (req, res, next) => {
     }
 };
 
-app.use('/dashboard',indexRouter);
-app.use('/movieDetails', movieDetailsRouter)
+app.use('/dashboard', jwtAuthentication, indexRouter);
+app.use('/movieDetails', jwtAuthentication, movieDetailsRouter)
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
