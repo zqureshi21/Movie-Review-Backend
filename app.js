@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 
 const createError = require('http-errors');
 const express = require('express');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
@@ -62,5 +61,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Movie app listening at http://localhost:${port}`)
 })

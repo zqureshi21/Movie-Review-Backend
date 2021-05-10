@@ -8,19 +8,19 @@ async function getComments(id){
 };
 
 router.get('/movie/:id', async function(req, res, next) {
-    let resp = await knex('movies').where({id:req.params.id});
-    if (resp.length === null){
+    let movie = await knex('movies').where({id:req.params.id});
+    if (movie.length === null){
         console.log('Movie does not exist.')
     }
-    res.send(resp[0]);
+    res.send(movie[0]);
 });
 
 router.get('/comments/:id', async function(req, res, next) {
-    let resp = await knex('comments').where({movies_id:req.params.id});
-    resp.sort((a,b)=>{
+    let comments = await knex('comments').where({movies_id:req.params.id});
+    comments.sort((a,b)=>{
         return a.id - b.id
     })
-    res.send(resp);
+    res.send(comments);
 });
 
 router.post('/comments', function(req, res, next){
@@ -35,7 +35,7 @@ router.post('/comments', function(req, res, next){
 
 router.put('/comments/:id', async function(req, res, next){
     let comments = await getComments(req.params.id)
-    if (req.user.user === comments[0].users_id) {
+    if (req.user.id === comments[0].users_id) {
         knex('comments')
             .where({ id: req.params.id })
             .update({comment: req.body.comment, rating: req.body.rating})

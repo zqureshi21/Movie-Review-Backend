@@ -21,23 +21,23 @@ async function getRatings(){
 }
 
 router.get('/', async function(req, res, next) {
-    let resp = await knex('movies');
-    if (resp.length === null){
+    let movies = await knex('movies');
+    if (movies.length === null){
         res.send(404, 'movies')
     }
     let ratings = await getRatings()
-    for (let i = 0; i < resp.length; i++){
+    for (let i = 0; i < movies.length; i++){
         for (let j = 0; j < ratings.length; j++){
-            if (resp[i].id === ratings[j].id){
-                resp[i].ratings = ratings[j].ratings
+            if (movies[i].id === ratings[j].id){
+                movies[i].ratings = ratings[j].ratings
                 continue
             }
         }
     }
-    resp.sort((a,b)=>{
+    movies.sort((a,b)=>{
         return a.id - b.id
     })
-    res.send(resp);
+    res.send(movies);
 });
 
 router.get('/user', function(req, res, next){
